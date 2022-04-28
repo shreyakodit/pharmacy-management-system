@@ -78,20 +78,20 @@ export default function StockReport() {
             </TableRow>
             {reports.map((report) => (
               <TableRow
-                key={report.reportID}
+                key={report.stockID}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell align="center">{report.stockID}</TableCell>
                 <TableCell align="center">{report.medicineName}</TableCell>
-                <TableCell align="center">{report.manufactureDate}</TableCell>
-                <TableCell align="center">{report.expiryDate}</TableCell>
+                <TableCell align="center">{report.manufactureDate.slice(0,10)}</TableCell>
+                <TableCell align="center">{report.expiryDate.slice(0,10)}</TableCell>
                 <TableCell align="center">{report.quantity}</TableCell>
                 <TableCell align="center">{report.costPerItem}</TableCell>
                 <TableCell align="center">
                   <Button id={report.medicineID} onClick={() => {deleteStock(report.medicineID)}}>
                     Delete
                   </Button>
-                  <Button id={report.medicineID}>
+                  <Button id={report.medicineID} href={`/UpdateStock/${report.stockID}`}>
                     Edit
                   </Button>
                 </TableCell>

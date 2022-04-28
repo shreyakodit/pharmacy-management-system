@@ -16,13 +16,13 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 
 function UpdateStock(props: UpdateProps) {
   const [stockID, setStockID] = useState(props.match.params.id);
-
+  console.log(props);
   const classes = useStyles();
   const [medicines, setMedicines] = useState([]);
   const [costPerItem, setCostPerItem] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [manufactureDate, setManufactureDate] = useState(null);
-  const [expiryDate, setExpiryDate] = useState('');
+  const [manufactureDate, setManufactureDate] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
   const [medicineID, setMedicineID] = useState('');
   const [medicineName, setMedicineName] = useState('');
 
@@ -36,7 +36,7 @@ function UpdateStock(props: UpdateProps) {
     )
       alert("All the fields have to be filled");
     else {
-      Axios.put(`http://localhost:5000/editStock/${stockID}`, {
+      Axios.put(`http://localhost:5000/editStockWithID/${stockID}`, {
         costPerItem,
         quantity,
         manufactureDate:manufactureDate.toISOString().slice(0, 10),
@@ -44,7 +44,10 @@ function UpdateStock(props: UpdateProps) {
         medicineID: medicineID,
       })
         .then((response) => {
-          //console.log(response.data);
+          console.log(response.data);
+          if(response.data=="done"){
+            alert("update done")
+          }
         })
         .catch((err) => console.log(err));
     }
@@ -68,7 +71,7 @@ function UpdateStock(props: UpdateProps) {
     });
 
     Axios.get(`http://localhost:5000/getMedicine/${medicineID}`).then((resp)=>{
-    let p =   resp.data[0].medicineName;
+    let p = resp.data[0].medicineName;
     console.log(p);
     setMedicineName(p);
     console.log(resp.data[0].medicineName);
@@ -106,7 +109,7 @@ function UpdateStock(props: UpdateProps) {
         Update Stock
       </Typography>
 
-      <FormControl sx={{ m: 0, minWidth: "100%" }}>
+      {/* <FormControl sx={{ m: 0, minWidth: "100%" }}>
         <InputLabel id="label">Select Medicine</InputLabel>
         <Select
           labelId="label"
@@ -116,12 +119,12 @@ function UpdateStock(props: UpdateProps) {
           label="Select Medicine"
           onChange={(e) => {
             setMedicineName(e.target.value);
-            // Axios.get(`http://localhost:5000/getMedicineByName/${medicineName}`)
-            // .then((response) => {
-            //   console.log(response.data);
-            //   setMedicineID(response.data[0].medicineID);
-            //   console.log(response.data[0].medicineID, medicineID);
-            // })
+            Axios.get(`http://localhost:5000/getMedicineByName/${medicineName}`)
+            .then((response) => {
+              console.log(response.data);
+              setMedicineID(response.data[0].medicineID);
+              console.log(response.data[0].medicineID, medicineID);
+            })
           }}
         >
           {medicines.map((x) => {
@@ -132,7 +135,7 @@ function UpdateStock(props: UpdateProps) {
             );
           })}
         </Select>
-      </FormControl>
+      </FormControl> */}
 
       <TextField
         id="quantity"
@@ -177,7 +180,7 @@ function UpdateStock(props: UpdateProps) {
           format="YYYY-MM-DD"
           onChange={(e) => {
             setManufactureDate(e);
-           
+            console.log(manufactureDate);
           }}
           renderInput={(params) => <TextField {...params} />}
         />

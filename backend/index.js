@@ -325,7 +325,7 @@ app.put('/editStockWithQuantity/:id', (request, response) => {
 });
 
 //update stock
-app.put('/editStockWithDate/:id', (request, response) => {
+app.put('/editStockWithID/:id', (request, response) => {
     const {id} = request.params;
     const {costPerItem, quantity, manufactureDate, expiryDate, medicineID} = request.body;
     let sql = `UPDATE STOCK SET costPerItem=${costPerItem}, quantity=${quantity}, manufactureDate='${manufactureDate}', expiryDate='${expiryDate}', medicineID=${medicineID} WHERE STOCKID=${id};`;
