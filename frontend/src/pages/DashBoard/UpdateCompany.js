@@ -29,6 +29,7 @@ function UpdateCompany(props: UpdateProps) {
         .then((response) => {
           console.log(response.data);
           console.log(companyName);
+          alert("Company Updated!")
         })
         .catch((err) => console.log(err));
     }
@@ -100,7 +101,7 @@ function UpdateCompany(props: UpdateProps) {
         />
         <Stack className={classes.buttonstack} direction="row" spacing={2}>
           <Button variant="contained" onClick={updateCompany}>
-            Add
+            Update
           </Button>
           <Button variant="contained" onClick={reset}>
             Reset

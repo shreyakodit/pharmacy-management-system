@@ -23,7 +23,7 @@ export default function Login() {
       password: password,
     }).then((response) => {
       console.log(response.data);
-      if(response.data == "Success") window.location='/dashboard';
+      if(response.data == "Success") window.location='/StartSell';
     });
   };
   return (
@@ -89,7 +89,7 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              href="/StartSell"
+              
             >
               Sign In
             </Button>

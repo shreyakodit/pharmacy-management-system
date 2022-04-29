@@ -40,7 +40,11 @@ export default function StartSell() {
   const [CartItems,setCart]=useState([]);
   const [orderID, setOrderID] = useState(0);
   const [disc, setDisc] = useState(1);
+  
   const [custdone, setcustdone] = useState(false);
+  const [stockQuantity, setStockQuantity] = useState(0);
+  const [qt, setQt]=useState(0);
+  const [discShow, setDiscShow] = useState('');
 
   const [stckid, setstckid] = useState(0);
   const [q, setq] = useState(0);
@@ -113,6 +117,7 @@ export default function StartSell() {
         quantity:item.StockQuantity
       }).then((response) => {
         console.log(response.data);
+        
       })
       setstckid(item.StockID);
       setq(item.Qnty);
@@ -146,6 +151,7 @@ export default function StartSell() {
     }
     Axios.put(`http://localhost:5000/editVisits/${custID}`).then((response) => {
       console.log(response.data);
+      alert("Order placed!!!")
     })
   }, [orderID])
 
@@ -225,7 +231,9 @@ export default function StartSell() {
                 setCustNumber(row.customerPhoneNumber);
                 if(row.numberOfVisits!=0 && row.numberOfVisits%10==0){
                   setDisc(0.95);
+                  setDiscShow(true);
                 }
+                else setDiscShow(false);
               }}>Select</Button></TableCell>
             </TableRow>
           ))}
@@ -250,6 +258,8 @@ export default function StartSell() {
             Name: {custName}, 
             Phone Number: {custNumber}
           </Typography>}
+
+          {discShow && <Typography variant="h7" marginLeft={1} marginTop = {2} marginBottom={2} textAlign="initial">The customer is eligible for discount</Typography>}
 
         </Paper>
         <div style={{display:`${isValid?"compact":"none"}`}}>
@@ -317,12 +327,14 @@ export default function StartSell() {
                   />
                   <Button variant="contained" onClick={(e) => {
                     e.preventDefault();
+                    if(custID=="") alert("Enter Customer details")
                     if(!qnty){
                       alert("Enter a valid quantity!");
                     }
                     else{
                       console.log(report.stockID, report.medicineName, qnty, report.costPerItem)
-                      if(disc==0.95)  {
+                      if(qnty>report.quantity)alert("Enter a valid quantity!");
+                      else if(disc==0.95)  {
                         setTotCost(totCost+report.costPerItem*qnty*0.95);
                         setCart([...CartItems,{
                           CartItemID:Math.floor((Math.random() * 10000) + 1),

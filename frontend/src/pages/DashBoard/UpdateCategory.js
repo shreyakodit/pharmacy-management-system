@@ -69,7 +69,7 @@ function UpdateCategory(props: UpdateProps) {
           marginBottom={2}
           textAlign="initial"
         >
-          Update a Company
+          Update a Category
         </Typography>
 
         <TextField

@@ -26,6 +26,7 @@ export default function AddMedicine() {
 
   medicines.map((x) => console.log(x.medicineName));
   const addStock = (e) => {
+    
     e.preventDefault();
     if (quantity == 0 || manufactureDate == null || expiryDate==null ||medicineID==0 ) alert("All the fields have to be filled")
     else {
@@ -44,6 +45,7 @@ export default function AddMedicine() {
         medicineID: id
       }).then((response) => {
         console.log(response.data);
+        alert("Stock added!")
       }).catch((err) => console.log(err));
             })
       

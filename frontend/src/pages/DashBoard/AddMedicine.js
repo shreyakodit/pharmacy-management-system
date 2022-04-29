@@ -42,6 +42,7 @@ export default function AddMedicine() {
       companyName:company.companyName,
       categoryName:category.categoryName}).then((response) => {
       console.log(response.data);
+      alert("Medicine added!")
     }).catch((err)=>console.log(err));}
   };
   

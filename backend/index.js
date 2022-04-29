@@ -568,7 +568,7 @@ app.get('/getOrder', (request, response) => {
 app.listen(process.env.PORT, () => {
     console.log('app is running');
     connection.connect((err) => {
-        if(err) console.log(error);
+        if(err) console.log(err);
         console.log("Database connected");
     })
 });

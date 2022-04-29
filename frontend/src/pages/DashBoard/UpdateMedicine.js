@@ -39,6 +39,7 @@ function UpdateMedicine(props: UpdateProps) {
       companyName:company,
       categoryName:category}).then((response) => {
       console.log(response.data);
+      alert("Edited successfully!")
     }).catch((err)=>console.log(err));}
   };
   

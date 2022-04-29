@@ -23,6 +23,7 @@ export default function AddCustomer() {
       if(response.data!="result"){
         setErrorMessage(response.data);
         console.log(response.data);
+        alert("Customer added!")
       }
       else setErrorMessage("Customer added!");
     });
